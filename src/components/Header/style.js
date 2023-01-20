@@ -11,7 +11,9 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.div`
-    color: #fff;
+    a {
+        color: #fff;
+    }
 `;
 
 export const ToggleTheme = styled.button`

@@ -1,11 +1,11 @@
 import { Global } from "./styles/global";
 
-import Header from "./components/Header";
+import RoutesApp from "./router/route";
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <RoutesApp/>
       
       <Global/>
     </div>
