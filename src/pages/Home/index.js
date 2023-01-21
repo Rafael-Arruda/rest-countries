@@ -10,8 +10,11 @@ import Card from "../../components/Card";
 
 export default function Home() {
 
+    const [loading, setLoading] = useState(true);
     const [visibility, setVisibility] = useState('hidden');
     const [countries, setCountries] = useState([]);
+    
+    const [pagination, setPagination] = useState(24);
 
     const handleVisibilityFilter = () => {
         visibility === 'hidden'? setVisibility('visible') : setVisibility('hidden')
@@ -21,7 +24,8 @@ export default function Home() {
         async function loadCountries() {
             await api.get('/all')
             .then((response) => {
-                setCountries(response.data);
+                setCountries(response.data.slice(0, pagination));
+                setLoading(false);
             })
             .catch(() => {
                 console.log('Error')
@@ -30,6 +34,17 @@ export default function Home() {
 
         loadCountries();
     }, [])
+
+    async function handleSeeMore() {
+        await api.get('/all')
+        .then((response) => {
+            setCountries(response.data.slice(0, pagination + 24))
+            setPagination(pagination + 24)
+        })
+        .catch(() => {
+            console.log('Error')
+        })
+    }
 
     return(
         <C.Container>
@@ -57,6 +72,7 @@ export default function Home() {
                     <Card key={index} country={country}/>
                 ))}
             </C.CountriesArea>
+            { !loading && <C.Button onClick={handleSeeMore}>Ver Mais</C.Button>}            
         </C.Container>
     )
 }

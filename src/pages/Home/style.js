@@ -5,6 +5,9 @@ export const Container = styled.div`
     min-height: 88vh;
     background: hsl(207, 26%, 17%);
     padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 export const FilterArea = styled.div`
@@ -86,4 +89,20 @@ export const CountriesArea = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 65px;
+`;
+
+export const Button = styled.button`
+    margin-top: 40px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: 0.3s all;
+
+    :hover {
+        background-color: hsl(209, 23%, 22%);
+    }
 `;

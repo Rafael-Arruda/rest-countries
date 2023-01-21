@@ -4,10 +4,6 @@ import * as C from './style';
 
 export default function Card({country}) {
 
-    useEffect(() => {
-        console.log(country)
-    }, [])
-
     return(
         <C.Container>
             <img src={country.flags.png} alt='country flag'/>
