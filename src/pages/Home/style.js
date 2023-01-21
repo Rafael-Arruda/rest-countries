@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100%;
-    height: 88vh;
+    min-height: 88vh;
     background: hsl(207, 26%, 17%);
     padding: 40px 50px;
 `;
@@ -44,7 +44,7 @@ export const Options = styled.div`
     color: #ddd;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    position: relative;
 
     .box-options {
         background-color: hsl(209, 23%, 22%);
@@ -61,6 +61,7 @@ export const Options = styled.div`
     }
     
     .dropdawn-menu {
+        width: 200px;
         display: flex;
         flex-direction: column;
         gap: 5px;
@@ -69,10 +70,20 @@ export const Options = styled.div`
         border-radius: 4px;
         font-size: 0.9em;
         font-weight: 600;
+        position: absolute;
+        top: 54px;
         visibility: ${(props) => props.visibility};
         
         span {
             cursor: pointer;
         }
     }
+`;
+
+export const CountriesArea = styled.div`
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 65px;
 `;
