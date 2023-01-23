@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {Link} from 'react-router-dom';
 
 import * as C from './style';
 
@@ -101,7 +102,9 @@ export default function Home() {
             </C.FilterArea>
             <C.CountriesArea>
                 {filterCountries.map((country, index) => (
-                    <Card key={index} country={country}/>
+                    <Link key={index} to={`/details/${country.name.common}`}>
+                        <Card country={country}/>
+                    </Link>
                 ))}
             </C.CountriesArea>
             { !loading && !filterInput && <C.Button onClick={handleSeeMore}>Ver Mais</C.Button>}            
