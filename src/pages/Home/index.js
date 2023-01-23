@@ -12,33 +12,39 @@ export default function Home() {
 
     const [loading, setLoading] = useState(true);
     const [visibility, setVisibility] = useState('hidden');
-    const [countries, setCountries] = useState([]);
     
-    const [pagination, setPagination] = useState(24);
+    const [countries, setCountries] = useState([]);
+    const [filterCountries, setFilterCountries] = useState([]);
 
-    const handleVisibilityFilter = () => {
-        visibility === 'hidden'? setVisibility('visible') : setVisibility('hidden')
-    }
+    const [filterInput, setFilterInput] = useState('');
+    const [filterRegion, setFilterRegion] = useState('Filter by Region');
+
+    const [pagination, setPagination] = useState(24);
 
     useEffect(() => {
         async function loadCountries() {
             await api.get('/all')
             .then((response) => {
-                setCountries(response.data.slice(0, pagination));
+                setCountries(response.data);
+                setFilterCountries(response.data.slice(0, pagination));
                 setLoading(false);
             })
             .catch(() => {
                 console.log('Error')
             })
         }
-
+        
         loadCountries();
     }, [])
+    
+    function handleVisibilityFilter() {
+        visibility === 'hidden'? setVisibility('visible') : setVisibility('hidden')
+    }
 
     async function handleSeeMore() {
         await api.get('/all')
         .then((response) => {
-            setCountries(response.data.slice(0, pagination + 24))
+            setFilterCountries(response.data.slice(0, pagination + 24))
             setPagination(pagination + 24)
         })
         .catch(() => {
@@ -46,33 +52,59 @@ export default function Home() {
         })
     }
 
+    function handleFilterCountries(e) {
+        const input = e.target.value.toLowerCase();
+        setFilterInput(e.target.value);
+        
+        const  filterList = 
+        countries.filter((country) => country.name.common.toLowerCase().includes(input))
+
+        setFilterCountries(filterList);
+    }
+
+    function handleFilterRegion(e) {
+        const input = e.target.value.toLowerCase();
+        input === '' ? setFilterRegion('Filter By Region') : setFilterRegion(e.target.value)
+
+        const filterList =
+        countries.filter((country) => country.region.toLowerCase().includes(input));
+
+        setFilterCountries(filterList);
+    }
+
     return(
         <C.Container>
             <C.FilterArea>
                 <C.Input>
                     <FaSearch color="#ddd" size={15}/>
-                    <input type='text' placeholder="Search for a country..."/>
+                    <input 
+                    type='text' 
+                    value={filterInput}
+                    onChange={handleFilterCountries}
+                    placeholder="Search for a country..."
+                    />
                 </C.Input>
                 <C.Options visibility={visibility}>
                     <div className="box-options" onClick={handleVisibilityFilter}>
-                        <span>Filter by Region</span>
+                        <span>{filterRegion}</span>
                         <FaAngleDown color="#ddd" size={13}/>
                     </div>
                     <div className="dropdawn-menu">
-                        <span>Africa</span>
-                        <span>America</span>
-                        <span>Asia</span>
-                        <span>Europe</span>
-                        <span>Oceania</span>
+                        <button onClick={handleFilterRegion} value=''>All</button>
+                        <button onClick={handleFilterRegion} value='Africa'>Africa</button>
+                        <button onClick={handleFilterRegion} value='America'>America</button>
+                        <button onClick={handleFilterRegion} value='Asia'>Asia</button>
+                        <button onClick={handleFilterRegion} value='Europe'>Europe</button>
+                        <button onClick={handleFilterRegion} value='Oceania'>Oceania</button>
                     </div>
                 </C.Options>
             </C.FilterArea>
             <C.CountriesArea>
-                {countries.map((country, index) => (
+                {filterCountries.map((country, index) => (
                     <Card key={index} country={country}/>
                 ))}
             </C.CountriesArea>
-            { !loading && <C.Button onClick={handleSeeMore}>Ver Mais</C.Button>}            
+            { !loading && !filterInput && <C.Button onClick={handleSeeMore}>Ver Mais</C.Button>}            
         </C.Container>
     )
 }

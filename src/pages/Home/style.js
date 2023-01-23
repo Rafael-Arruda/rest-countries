@@ -67,18 +67,21 @@ export const Options = styled.div`
         width: 200px;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 8px;
         background-color: hsl(209, 23%, 22%);
         padding: 15px 18px;
         border-radius: 4px;
         font-size: 0.9em;
-        font-weight: 600;
         position: absolute;
         top: 54px;
         visibility: ${(props) => props.visibility};
         
-        span {
-            cursor: pointer;
+        button {
+            background: transparent;
+            border: none;
+            text-align: left;
+            color: #ddd;
+            font-weight: 600;
         }
     }
 `;
