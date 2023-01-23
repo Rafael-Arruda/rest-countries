@@ -8,12 +8,20 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media screen and (max-width: 600px){
+        padding: 40px 30px;
+    }
 `;
 
 export const FilterArea = styled.div`
     width: 100%;  
     display: flex;
     justify-content: space-between;
+
+    @media screen and (max-width: 600px){
+        flex-direction: column;
+    }
 `;
 
 export const Input = styled.div`
@@ -27,6 +35,11 @@ export const Input = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
+
+    @media screen and (max-width: 600px){
+        width: 100%;
+        max-width: none;
+    }
 
     input {
         background-color: transparent;
@@ -48,6 +61,10 @@ export const Options = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
+
+    @media screen and (max-width: 600px){
+        margin-top: 30px;
+    }
 
     .box-options {
         background-color: hsl(209, 23%, 22%);
@@ -92,6 +109,10 @@ export const CountriesArea = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 65px;
+
+    @media screen and (max-width: 1000px){
+        justify-content: space-evenly;
+    }
 `;
 
 export const Button = styled.button`

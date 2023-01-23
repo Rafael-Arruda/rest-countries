@@ -8,11 +8,21 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0px 50px;
+
+    @media screen and (max-width: 600px){
+        padding: 0px 30px;
+    }
 `;
 
 export const Logo = styled.div`
     a {
         color: #fff;
+    }
+
+    @media screen and (max-width: 600px){
+        h2 {
+            font-size: 1.2em;
+        }
     }
 `;
 
@@ -27,5 +37,11 @@ export const ToggleTheme = styled.button`
     span {
         font-weight: 600;
         font-size: 1em;
+    }
+
+    @media screen and (max-width: 600px){
+        span {
+            font-size: 0.9em;
+        }
     }
 `;

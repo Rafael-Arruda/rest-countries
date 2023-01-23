@@ -13,7 +13,7 @@ export default function Header() {
                 </Link>
             </C.Logo>
             <C.ToggleTheme>
-                <FaMoon color="#fff" size={14}/>
+                <FaMoon color="#fff" size={12}/>
                 <span>Dark Mode</span>
             </C.ToggleTheme>
         </C.Container>
