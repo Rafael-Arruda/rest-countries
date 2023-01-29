@@ -20,6 +20,10 @@ export const Container = styled.div`
         font-weight: 600;
         box-shadow: -1px 1px 5px #111;
     }
+
+    @media screen and (max-width: 600px){
+        padding: 40px 30px;
+    }
 `;
 
 export const Content = styled.div`
@@ -76,6 +80,32 @@ export const Content = styled.div`
         font-weight: 600;
         color: #ddd;
         text-align: center;
+    }
+
+    @media screen and (max-width: 1050px){
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 50px;
+
+        .box-content {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .box-border-countries {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+    }
+
+    @media screen and (max-width: 600px){
+        
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
     }
 
 `;
